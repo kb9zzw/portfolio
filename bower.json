@@ -1,0 +1,11 @@
+{
+  "name": "portfolio",
+  "version": "0.1",
+  "dependencies": {
+    "bootstrap": "~3.2.0",
+    "jquery-form": "~3.46.0",
+    "twentytwenty": "*",
+    "leaflet": "~0.7.3",
+    "leaflet-ajax": "~1.1.0"
+  }
+}
