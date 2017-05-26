@@ -1,0 +1,88 @@
+{% extends "index.html" %}
+
+{% load tags %}
+{% load static %}
+
+{% block "header" %}
+<header class="sb-page-header">
+  <div class="container-fluid">
+    <h1>2011 Severe Weather</h1>
+    <p>Using GIS web mapping to explore a particularly active weather year.</p>
+  </div>
+</header>
+{% endblock "header" %}
+
+{% block "breadcrumb" %}
+<li class="{% active request "^/svr_wx/$" %}">Severe Weather</li>
+{% endblock "breadcrumb" %}
+
+{% block "content" %}
+<div class="container-fluid">
+  <h3>Introduction</h3>
+  <div class="well">
+    <p>This project was created as a final web mapping demostration project for GIS 515 in North Carolina State University's MGIST program.  The
+      goal of this project was to explore cartographic representation of GIS data using web technologies.  For this project, I chose to
+      explore <a href="http://www.mapbox.com" title="Mapbox">Mapbox</a> as the primary technology used to highlight the 2011 severe weather
+      season.  Mapbox was chosen because it provides a rich user experience for users to explore spatial data in a
+      dynamic and interactive way.
+    </p>
+    <p>The button below links to the live site.</p>
+    <p><a href="http://neptune.fluxmess.com" title="2011 Severe Weather" class="btn btn-primary" target="_blank">2011 Severe Weather Overview</a>
+  </div>
+
+  <h3>Highlights</h3>
+  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">2011 Tornado Tracks</h3>
+      </div>
+      <div class="panel-body">
+        <img src="{% static "images/2011_tornado.png" %}" alt="2011 Tornado Tracks" style="width: 100%;"/>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">2011 Hail Events</h3>
+      </div>
+      <div class="panel-body">
+        <img src="{% static "images/2011_hail.png" %}" alt="2011 Hail Events" style="width: 100%;"/>
+      </div>
+    </div>
+  </div>
+
+  <div class="clearfix"></div>
+
+  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Hurricane Irene</h3>
+      </div>
+      <div class="panel-body">
+        <img src="{% static "images/2011_tropical.png" %}" alt="Hurricane Irene" style="width: 100%;"/>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+    <h3>Technologies</h3>
+
+    <table class="table">
+      <tr class="info">
+        <th>User Interface</th>
+        <td>Mapbox Javascript API, CSS</td>
+      </tr>
+      <tr>
+        <th>Application &amp; Tools</th>
+        <td>Mapbox, TileMill, ArcGIS</td>
+      </tr>
+    </table>
+    <div class="well">
+      <p>Raw data for this project was processed in ArcGIS, then converted to interactive layers using <a href="https://www.mapbox.com/tilemill/" title="TileMill">TileMill</a>
+        for loading into Mapbox.  Mapbox tiles were added to the web site using the Mapbox Javascript API.
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock "content" %}

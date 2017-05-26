@@ -1,0 +1,118 @@
+{% extends "index.html" %}
+
+{% load tags %}
+{% load static %}
+
+{% block "header" %}
+<header class="sb-page-header">
+  <div class="container-fluid">
+  <h1>Suitability Analysis</h1>
+  <p>Using a combination of parameters to find the best match location</p>
+</header>
+{% endblock "header" %}
+
+{% block "breadcrumb" %}
+<li class="{% active request "^/gps/$" %}">Suitability Analysis</li>
+{% endblock "breadcrumb" %}
+
+{% block "content" %}
+<div class="container-fluid">
+  <h3>Introduction</h3>
+  <div class="well">
+    <p>Suitability analysis involves combining data an attributes to find the most favorable location for an event.
+    The example below shows how ArcGIS can be used to find the most favorable bear habitat locations in the Smoky Mountain
+    National Park.  The general process involved creating reclassified raster datasets for each parameter ranking
+    the parameter from least favorable (1) to most favorable (3).</p>
+
+    <p>The following parameters were used for this analysis:</p>
+
+    <ul>
+      <li>Vegetation</li>
+      <li>Slope</li>
+      <li>Distance to Trails</li>
+      <li>Distance to Streams</li>
+      <li>Distance to Roads</li>
+    </ul>
+  </div>
+
+
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Suitability Model</h3>
+      </div>
+      <div class="panel-body">
+        <img src="{% static "images/suitability_model.png" %}" style="width: 100%;" alt="Suitability Model"/>
+          <p>ArcGIS Model Builder was used in this case to analyze raw data and create reclassified raster data
+            based on selection criteria..</p>
+          <p><a class="btn btn-default" href="{% static "images/suitability_model.png" %}" target="_blank" role="button">View Full Size &raquo;</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="clearfix"></div>
+
+  <h3>Reclassified Data</h3>
+  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Reclassified Trails</h3>
+      </div>
+      <div class="panel-body">
+        <img src="{% static "images/trails_small.jpg" %}" style="width: 100%;" alt="Distance to Trails"/>
+        <p>This image shows areas of areas of most favorable (green) to least favorable (red) distance to trails.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Reclassified Streams</h3>
+      </div>
+      <div class="panel-body">
+        <img src="{% static "images/streams_small.jpg" %}" style="width: 100%;" alt="Distance to Streams"/>
+        <p>This image shows areas of areas of most favorable (green) to least favorable (red) distance to streams.</p
+        <p>Distance to roads was classified in a similar manner</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Reclassified Vegetation</h3>
+      </div>
+      <div class="panel-body">
+        <img src="{% static "images/vegetation_small.jpg" %}" style="width: 100%;" alt="Vegetation"/>
+        <p>This image shows areas of areas of most favorable (green) to least favorable (red) vegetation categories.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Reclassified Slope</h3>
+      </div>
+      <div class="panel-body">
+        <img src="{% static "images/slope_small.jpg" %}" style="width: 100%;" alt="Slope"/>
+        <p>This image shows areas of areas of most favorable (green) to least favorable (red) areas of slope.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Final Results</h3>
+      </div>
+      <div class="panel-body">
+        <img src="{% static "images/suitability_results.jpg" %}" style="width: 100%;" alt="Final Results"/>
+        <p>When the individual suitability rasters are combined using weighted overlay, the following map reveals areas
+        that are most favorable bear habitats according to the criteria.</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock "content" %}

@@ -1,0 +1,89 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+{% block "header" %}
+<header class="sb-page-header">
+  <div class="container-fluid">
+    <h1>Mapping &amp; Cartography</h1>
+    <p>Graphical communication for different media.</p>
+  </div>
+</header>
+{% endblock "header" %}
+
+{% block "content" %}
+
+<div class="container-fluid">
+
+  <h3>Introduction</h3>
+  <div class="well">
+    <p>It is important when designing maps to keep in mind the audience and medium.  Different media lend themselves
+        to different graphical representations.  For example, in many scientific journals, space is at a premium and color
+        may not be available.  This stands in contrast to modern web maps which make liberal use of color and add
+        tremendous functionality.</p>
+
+    <p>Below are three examples of maps designed for different media.</p>
+  </div>
+
+  <div class="col-sm-6 col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Print Maps</h3>
+      </div>
+      <div class="panel-body">
+        <img src="{% static "images/bw_map.png" %}" style="width: 100%;"/>
+        <p>This particular image compares the forecasted versus actual path of Hurricane Sandy.</p>
+        <p>The goal of this image was to create a graphic constrained by size and color, such as might be found
+          in a scientific journal.  Shades of gray and symbols are used to highlight map features.</p>
+        <p><a class="btn btn-default" href="{% static "images/bw_map.png" %}" target="_blank" role="button">View Full Size &raquo;</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6 col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Color Maps</h3>
+      </div>
+      <div class="panel-body">
+        <img src="{% static "images/color_map.jpg" %}" style="width: 100%;"/>
+        <p>This choropleth image uses color to highlight ratio data, such as the number of government workers as a
+              percent of population.  Colors increase in warmth as the percent increases.</p>
+        <p><a class="btn btn-default" href="{% static "images/color_map.jpg" %}" target="_blank" role="button">View Full Size &raquo;</a></p>      </div>
+    </div>
+  </div>
+
+  <div class="visible-sm-block clearfix"></div>
+
+  <div class="col-sm-6 col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Web Maps</h3>
+      </div>
+      <div class="panel-body">
+        <div id="map" style="height: 300px;"></div>
+        <p>This map shows hail events for 2011 by county.</p>
+        <p>Unlike static images, which are confined by size, web maps can provide a much more interactive experience.</p>
+        <p>Modern web maps can be panned and zoomed to provide the illusion of the entire world in a small box.  This map
+          was created in JavaScript using MapBox.  The underlying data started off in ArcGIS Desktop and was converted from
+          Shapefile to Mapbox Tile Layer using TileMill.</p>
+        <p><a class="btn btn-default" href="http://neptune.fluxmess.com/hail.html" target="_blank" role="button">View Application &raquo;</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock "content" %}
+
+{% block "script" %}
+<script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.2/mapbox.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.2/mapbox.css' rel='stylesheet' />
+
+
+
+<script>
+// Provide your access token
+L.mapbox.accessToken = 'pk.eyJ1Ijoia2I5enp3IiwiYSI6IkhmQ29wUTgifQ.WBtqScwDXSHlrNk5ZTlaMw';
+// Create a map in the div #map
+L.mapbox.map('map', 'kb9zzw.map-kcip4ghc');
+</script>
+{% endblock "script" %}

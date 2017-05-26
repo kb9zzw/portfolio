@@ -1,0 +1,63 @@
+{% extends "index.html" %}
+
+{% load tags %}
+{% load static %}
+
+{% block "header" %}
+<header class="sb-page-header">
+  <div class="container-fluid">
+    <h1>About MGIST</h1>
+    <p><em>"The application of GIS is limited only by the imagination of those who use it".</em> - <strong>Jack Dangermond, Esri</strong></p>
+  </div>
+</header>
+{% endblock "header" %}
+
+{% block "breadcrumb" %}
+<li class="{% active request "^/about/$" %}">About This Site</li>
+{% endblock "breadcrumb" %}
+
+{% block "content" %}
+
+<div class="container-fluid">
+
+  <h3>Introduction</h3>
+  <div class="well">
+  <p>I've been working for the past three years on achieving the Master of Geospatial Information Science (MGIST) degree
+    from the <a href="http://cnr.ncsu.edu/geospatial/" title="NCSU CGA">Center for Geospatial Analytics</a> at North Carolina State University.  During my student career, I have
+    been challenged to stretch my imagination on what GIS is and how it can be used.  Looking back, I am amazed at
+    the variety of scenarios where GIS technologies can be applied.</p>
+  </div>
+
+  <div class="pull-left"><img src="{% static "images/bipartite.jpg" %}" /></div>
+  <h3>What is GIScience?</h3>
+  <p>One of the concepts stressed early in the MGIST program was the concept of GIScience.  It is easy to identify GIS
+    with the tools and technologies used for cartography, mapping and analysis.  But GIScience goes far beyond the
+    tools.  It stresses the application of scientific methods to geospatial problems. As I have learned, it can be
+    quite helpful to think about scientific problems in a geospatial context.  Most scientific problems have a "where", a
+    location in time or space that can be investigated.  GIScience brings a mindset of location to these problems, using
+    principles of spatial analyisis, statistics and fundamentals of geography to bear on solving the problem.  This can
+    be found in many of the tools used in GIS today.</p>
+
+  <div class="clearfix"></div>
+  <h3>Applications of GIScience</h3>
+  <p>The applications of GIS and GIScience are nearly endless, as I've learned.  While my background is in
+    environmental analysis, specifically meteorology and climatology, my peers were often using GIS for
+    wildy different applications.  Business applications, such as real estate development, were common.
+    Forest management, oceanography, political science were also common.  If a problem has a location, GIScience
+    can almost certainly be used to address that problem.</p>
+
+  <h3>GIS @ NC State University</h3>
+  <p>Throughout the last 3 years, I've had tremendous opportunity to explore the GIScience space.  At first, it
+    started with becoming familiar with the tools and language of GIS.  By the end, it has grown into a mature
+    understanding of geopatial theory and the ability to apply this theory to model real-world environments.  This
+    can be seen throughout this site in the application of GIS to climate change, one of my focus areas.</p>
+  <p>I invite you to browse this site, which compiles some of the work that I have performed during my career in the
+    MGIST program at NC State University.  My hope is that this showcases a broad variety of skills and technologies
+    I've acquired during my studies.  I also invite you to visit the <a href="http://cnr.ncsu.edu/geospatial/" title="NCSU CGA">Center for Geospatial Analytics</a>,
+    where work continues on cutting-edge GIScience and related technologies.</p>
+
+    <p style="font-size: 1.5em; font-weight: bold; color: #CC0000;">Go Pack!!</p>
+
+</div>
+<img src="{% static "images/oncampus-flickrheader-1418x189.png" %}" style="width: 100%;"/>
+{% endblock "content" %}

@@ -1,0 +1,118 @@
+{% extends "index.html" %}
+
+{% load tags %}
+{% load static %}
+
+{% block "header" %}
+<header class="sb-page-header">
+  <div class="container-fluid">
+  <h1>Minnesota Climate Impacts</h1>
+  <p>Supporting citizen science with open source GIS technologies</p>
+</header>
+{% endblock "header" %}
+
+{% block "breadcrumb" %}
+<li class="{% active request "^/mn_climate/$" %}">Minnesota Climate Impacts</li>
+{% endblock "breadcrumb" %}
+
+{% block "content" %}
+<div class="container-fluid">
+  <h3>Introduction</h3>
+  <div class="well">
+    <p>This web survey application was created to help scientists collect information about climate vulnerability
+    and resilience along the north shore of Lake Superior.  This project involved two aspects:<p>
+    <ul>
+      <li>Create compelling user interface that can be used to collect climate data from the people who are familiar with the region.</li>
+      <li>Provide a means to analyze the user input to find areas that might be impacted</li>
+    </ul>
+
+    <p>One of the issues when implementing open-source GIS tools is interoperability with proprietary tools, such as ArcGIS. To
+    help with this, the application also implements a number of interoperability features to allow data to be exported from
+    the open-source implementation into formats that can be readily consumed by ArcGIS and other tools.  This includes implementation
+    of shapefile and KML export capabilities.  Web services are available that can export the data as OGC WFS and GeoJSON.</p>
+
+    <p>The live site can be viewed by clicking the button below.</p>
+
+    <a href="http://gis.fluxmess.com" class="btn btn-primary" target="_blank">Live Demo</a>
+  </div>
+
+  <h3>Slide Show Preview</h3>
+  <div id="mn_carousel" class="carousel slide center-block" data-ride="carousel" data-interval="5000">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#mn_carousel" data-slide-to="0" class="active"></li>
+      <li data-target="#mn_carousel" data-slide-to="1"></li>
+      <li data-target="#mn_carousel" data-slide-to="2"></li>
+      <li data-target="#mn_carousel" data-slide-to="3"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+      <div class="item active" id="mn_slide1">
+        <div class="carousel-caption">
+          <h3>Climate Impacts</h3>
+          <p>Locations of positive and negative climate impacts are represented as markers.</p>
+        </div>
+      </div>
+      <div class="item" id="mn_slide2">
+        <div class="carousel-caption">
+          <h3>Adding an Impact</h3>
+          <p>Users can be invited to add a marker and describe the climate impact at that location.</p>
+        </div>
+      </div>
+      <div class="item" id="mn_slide3">
+        <div class="carousel-caption">
+          <h3>Heat Map</h3>
+          <p>This heatmap highlights concentrations of climate impact markers.</p>
+        </div>
+      </div>
+      <div class="item" id="mn_slide4">
+        <div class="carousel-caption">
+          <h3>Zip Code Summary</h3>
+          <p>Impact counts can be represented per zip code.  A similar report is available for counties.</a>
+        </div>
+      </div>
+    </div>
+    <!-- Controls -->
+    <a class="left carousel-control" href="#mn_carousel" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    <a class="right carousel-control" href="#mn_carousel" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+  </div>
+
+  <h3>Technologies</h3>
+
+  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+    <table class="table">
+      <tr class="info">
+        <th>User Interface</th>
+        <td>Leaflet, JQuery, JavaScript, Bootstrap</td>
+      </tr>
+      <tr>
+        <th>Application</th>
+        <td>Apache, Python, GeoDjango</td>
+      </tr>
+      <tr class="info">
+        <th>Database</th>
+        <td>PostgreSQL, PostGIS</td>
+      </tr>
+      <tr>
+        <th>System</th>
+        <td>Ubuntu</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+    <div class="well">
+    <p>This project demonstrates what is possible using open-source GIS technologies.  The entire application, from the operating
+      system to the user interface, is implemented using open source tools and frameworks.
+    </p>
+    <p>Source code for this application can be found on <a href="http://github.com/kb9zzw/mn_climate" target="blank">GitHub</a></p>
+  </div>
+  </div>
+
+</div>
+{% endblock "content" %}

@@ -1,0 +1,110 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+{% block "header" %}
+<header class="sb-page-header">
+  <div class="container-fluid">
+  <h1>Web Services</h1>
+  <p>Distributing Geospatial Data Online</p>
+</header>
+{% endblock "header" %}
+
+{% block "content" %}
+<div class="container-fluid">
+  <h3>Introduction</h3>
+  <div class="well">
+    <p>GIS rarely exists in a vacuum.  Increasingly, GIS professionals are called upon to present their information online
+      in dynamic and collaborative formats.  This requires not only a fundamental knowledge of geospatial technologies, such
+      as coordinate systems, projections and topologies, but also some knowledge of web-based communication, data standards and
+      web services.</p>
+  </div>
+
+  <h3>Interoperability</h3>
+  <p>In this example, climate impact markers are loaded from web services and displayed in the browser.  The data is available
+    through different web service formats, GeoJSON and KML.  This allows for interoperability with different
+    clients and applications.
+  </p>
+  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">GeoJSON Services</h3>
+      </div>
+      <div class="panel-body">
+        <div id="leaflet-map" style="height: 300px;"></div>
+        This shows an example of loading impact markers using a GeoJSON service into a Leaflet map.  The
+        raw GeoJSON data is available at the following URL:  <a href="http://gis.fluxmess.com/impacts/" target="_blank" title="Impacts GeoJSON Service">http://gis.fluxmess.com/impacts/</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">KML Services</h3>
+      </div>
+      <div class="panel-body">
+        <div id="google-map" style="height: 300px;"></div>
+        <p>This shows an example of loading impact markers using a KML service into a Google Map.  The
+        raw KML data is available at the following URL:  <a href="http://gis.fluxmess.com/impacts.kml" target="_blank" title="Impacts KML Service">http://gis.fluxmess.com/impacts.kml</a>.
+      </div>
+    </div>
+  </div>
+
+  <p>Interoperability can also be acheived through use of Open Geospatial Consortium web services.  For example,
+    the impacts marker above is also available as a Web Feature Service (WFS) that can be consumed by clients
+    that support WFS.
+  </p>
+  <ul>
+    <li>WFS GetCapabilities: <a href="http://gis.fluxmess.com/wfs?service=wfs&request=GetCapabilities" target="_blank" title="Impacts WFS Service">http://gis.fluxmess.com/wfs?service=wfs&request=GetCapabilities</a></li>
+  </ul>
+
+</div>
+{% endblock "content" %}
+
+{% block "script" %}
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6ltjs5JvHExng2fd5EthyqTxbvGGIf70"></script>
+
+<script type="text/javascript">
+function initialize() {
+  var mapOptions = {
+    center: { lat: 46.80, lng: -92.10 },
+    zoom: 16
+  };
+
+  var google_map = new google.maps.Map(document.getElementById('google-map'), mapOptions);
+
+  var kmlPath = "http://gis.fluxmess.com/impacts.kml";
+
+  var layer = new google.maps.KmlLayer(kmlPath);
+  layer.setMap(google_map);
+
+  var leaflet_map = L.map('leaflet-map').setView([46.80, -92.10], 7);
+  L.Icon.Default.imagePath = 'http://api.tiles.mapbox.com/mapbox.js/v1.0.0beta0.0/images';
+
+  var esriNatGeo = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles &copy; Esri &mdash; National Geographic, Esri, DeLorme, NAVTEQ, UNEP-WCMC, USGS, NASA, ESA, METI, NRCAN, GEBCO, NOAA, iPC',
+    maxZoom: 16
+  }).addTo(leaflet_map);
+
+  $.getJSON("http://gis.fluxmess.com/impacts/", function(data) {
+    var geojson = L.geoJson(data, {
+      onEachFeature: function (feature, layer) {
+        layer.bindPopup('<strong>Location Name:</strong>' +
+          '<br />' + feature.properties.location_name +
+          '<br /><strong>Comments:</strong>' +
+          '<br />' + feature.properties.comment);
+      }
+    });
+    geojson.addTo(leaflet_map);
+  });
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+
+</script>
+
+
+
+{% endblock "script" %}

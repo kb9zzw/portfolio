@@ -1,0 +1,174 @@
+{% extends "index.html" %}
+
+{% load tags %}
+{% load static %}
+
+{% block "header" %}
+<header class="sb-page-header">
+  <div class="container-fluid">
+  <h1>Remote Sensing</h1>
+  <p>Observing from a distance</p>
+</header>
+{% endblock "header" %}
+
+{% block "breadcrumb" %}
+<li class="{% active request "^/gps/$" %}">Remote Sensing</li>
+{% endblock "breadcrumb" %}
+
+{% block "content" %}
+<div class="container-fluid">
+  <h3>Introduction</h3>
+  <div class="well">
+    <p>Remote sensing provides a powerful way to investigate patterns and trends in the environment without direct measurement.  Spectral
+      properties of sensors can be used to extract information about a particular area.  There are many types of remote sensing platforms.
+      Satellites provide a view from space and offer the benefit of being able to monitor areas nearly continuously or with frequent revisits.
+      While sensor packages on satellites are getting increasingly sophisticated, there are limitations due to altitude and general inaccessibility
+      for repair and modification.  Other remote sensing platforms, such as aerial imagery and LIDAR can be used to supplement the vast
+      amount of information from satellites.</p>
+    </p>Below are some selections and examples of using various remote sensing platforms to investigate the environment.</p>
+  </div>
+  
+  <h3>Gallery</h3>
+  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Georectification - Rubber Sheeting</h3>
+      </div>
+      <div class="panel-body">
+        <img src="{% static "images/schenck_rubb.png" %}" class="img-thumbnail" style="width: 100%;"/>
+        <p>This example shows rubber-sheeting technique used to align (georectify) two images in Schenck Forest, NC.  Georectification
+        was performed using ERDAS Imagine.</p>
+        <p><a class="btn btn-default" href="{% static "images/schenck_rubb.png" %}" target="_blank" role="button">View Full Size &raquo;</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Georectification - Polynomial</h3>
+      </div>
+      <div class="panel-body">
+        <img src="{% static "images/schenck_poly.png" %}" class="img-thumbnail" style="width: 100%;"/>
+        <p>This example shows geometric correction using polynomial rectification of Schenck Forest, NC using ERDAS Imagine.</p>
+        <p><a class="btn btn-default" href="{% static "images/schenck_poly.png" %}" target="_blank" role="button">View Full Size &raquo;</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="clearfix visible-sm visible-md"></div>
+
+  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">3D Digital Elevation</h3>
+      </div>
+      <div class="panel-body">
+        <img src="{% static "images/elev_arcscene.png" %}" class="img-thumbnail" style="width: 100%;"/>
+        <p>In this image, digital elevation is derived from 1m LIDAR data and presented in ESRI ArcScene.</p>
+        <p><a class="btn btn-default" href="{% static "images/elev_arcscene.png" %}" target="_blank" role="button">View Full Size &raquo;</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Wetness Index</h3>
+      </div>
+      <div class="panel-body">
+        <img src="{% static "images/wetness.png" %}" class="img-thumbnail" style="width: 100%;"/>
+        <p>Wetness index, calculated from 1m LIDAR digital elevation model.  3D view was created using GRASS.</p>
+        <p><a class="btn btn-default" href="{% static "images/wetness.png" %}" target="_blank" role="button">View Full Size &raquo;</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="clearfix visible-sm visible-md visible-lg"></div>
+
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Edge Detection</h3>
+      </div>
+      <div class="panel-body">
+        <div id="beforeafter1" class="twentytwenty-container">
+          <img alt="before" src="{% static "images/ls_band4.png" %}" style="width: 100%;"/>
+          <img alt="after" src="{% static "images/ls_edge.png" %}" style="width: 100%;"/>
+        </div>
+        <p>This image shows non-directional edge detection performed in ERDAS Imagine on near-infrared Landsat imagery.  This enhancement
+          highlights feature edges, making them more identifiable.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Radiometric Enhancement</h3>
+      </div>
+      <div class="panel-body">
+        <div id="beforeafter2" class="twentytwenty-container">
+          <img alt="before" src="{% static "images/radiometric1.png" %}" style="width: 100%;"/>
+          <img alt="after" src="{% static "images/radiometric2.png" %}" style="width: 100%;"/>
+        </div>
+        <p>Radiometric enhancement can be used to highlight features and extract them from the surrounding noise.  In this case,
+        the goal was to highlight the confluence of two rivers, the Missouri and Mississipi.  The image started off as an unstretched RGB Landsat 4 image.
+        Spectral profile points were added identify spectral signatures of both rivers.  The result is an image where the water features
+        are enhanced from the surrounding landscape.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="clearfix visible-lg"></div>
+
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Digitization</h3>
+      </div>
+      <div class="panel-body">
+        <img src="{% static "images/digitize.png" %}" class="img-thumbnail" style="width: 100%;"/>
+        <p>This is an example of feature digitization in ERDAS Imagine from an aerial orthoimage of downtown Asheville, NC.</p>
+        <p><a class="btn btn-default" href="{% static "images/digitize.png" %}" target="_blank" role="button">View Full Size &raquo;</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">2nd Return LIDAR</h3>
+      </div>
+      <div class="panel-body">
+        <img src="{% static "images/2nd_return_lidar_arcgis.png" %}" class="img-thumbnail" style="width: 100%;"/>
+        <p>This image uses 2nd returns from LIDAR data to identify forested stands.  This image was derived in ArcGIS using 1m LIDAR data.</p>
+        <p><a class="btn btn-default" href="{% static "images/2nd_return_lidar_arcgis.png" %}" target="_blank" role="button">View Full Size &raquo;</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Terrain Analysis</h3>
+      </div>
+      <div class="panel-body">
+        <img src="{% static "images/tancurvature2_3D.png" %}" class="img-thumbnail" style="width: 100%;"/>
+        <p>LIDAR data is extremely useful for terrain analysis.  This example shows tangential curvature derived from 1m LIDAR bare earth data.
+        This analysis, performed using GRASS, shows areas that may be more susceptible to erosion.</p>
+        <p><a class="btn btn-default" href="{% static "images/tancurvature2_3D.png" %}" target="_blank" role="button">View Full Size &raquo;</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock "content" %}
+
+{% block "script" %}
+<script>
+$(window).load(function() {
+  $('#beforeafter1').twentytwenty();
+  $('#beforeafter2').twentytwenty();
+});
+</script>
+{% endblock "script" %}

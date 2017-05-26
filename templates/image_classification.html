@@ -1,0 +1,71 @@
+{% extends "index.html" %}
+
+{% load tags %}
+{% load static %}
+
+{% block "header" %}
+<header class="sb-page-header">
+  <div class="container-fluid">
+  <h1>Image Classification</h1>
+  <p>Using remote sensing to identify features.</p>
+</header>
+{% endblock "header" %}
+
+{% block "breadcrumb" %}
+<li class="{% active request "^/image_classification/$" %}">Image Classification</li>
+{% endblock "breadcrumb" %}
+
+{% block "content" %}
+<div class="container-fluid">
+
+  <h3>Introduction</h3>
+  <div class="well">
+    <p>Being able to extract features from remote sensing data is a powerful way to analyze imagery and monitor vast areas
+    for environmental change. In this example, supervised image classification is employed to identify various categories
+    of land or wetland types.   This particular technique uses small samples which train the software to identify areas
+    that are similar in spectral characterstics.  The technique is rarely perfect, but major features such as water or forest
+    are distinguishable from other areas such as cultivated land or bare areas.</p>
+
+    <p>Classification below was performed using ArcGIS Desktop.</p>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 center-block">
+      <h3>Sample Polygons</h3>
+      <div id="beforeafter1" class="twentytwenty-container">
+        <img alt="before" src="{% static "images/part_1_sample_polygons.jpg" %}" style="width: 100%;"/>
+        <img alt="after" src="{% static "images/part_2_sample_polygons.jpg" %}" style="width: 100%;"/>
+      </div>
+      <p>Near infrared imagery before classification.  Training samples are drawn over areas of continuous feature types.
+        Slide the slider to the left to see the difference between a few sample polygons and many.</p>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 center-block">
+      <h3>Classification Results</h3>
+      <div id="beforeafter2" class="twentytwenty-container">
+        <img alt="before" src="{% static "images/part_1_image_classification.jpg" %}" style="width: 100%;"/>
+        <img alt="after" src="{% static "images/part_2_image_classification.jpg" %}" style="width: 100%;"/>
+      </div>
+      <p>This show the results of running supervised classification using the sample polygons from the previous image.  Classification
+        generally improves as more sample polygons are added.  For example, slide the slider to the left to see that
+        cultivated areas are more readily identified.  However, even with more samples, the classification is not
+        perfect.</p>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 center-block">
+      <h3>Problem Areas</h3>
+      <img alt="shadows" src="{% static "images/shadows.png" %}" style="width: 100%;"/>
+      <p>Satellite images often have shadows and other image artifacts that interfere with classification techniques. This
+        image has a shadow area along the tree line separating the forested area from cultivated areas.  This section
+        is difficult for the software to classify and may require human digitization.</p>
+    </div>
+  </div>
+</div>
+{% endblock "content" %}
+
+{% block "script" %}
+<script>
+$(window).load(function() {
+  $('#beforeafter1').twentytwenty();
+  $('#beforeafter2').twentytwenty();
+});
+</script>
+{% endblock "script" %}

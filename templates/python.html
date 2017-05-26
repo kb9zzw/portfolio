@@ -1,0 +1,143 @@
+{% extends "index.html" %}
+
+{% load tags %}
+
+{% block "header" %}
+<header class="sb-page-header">
+  <div class="container-fluid">
+    <h1>Python</h1>
+    <p>A language of scientific computing</p>
+  </div>
+</header>
+{% endblock "header" %}
+
+{% block "breadcrumb" %}
+<li class="{% active request "^/python/$" %}">Python</li>
+{% endblock "breadcrumb" %}
+
+{% block "content" %}
+<div class="container-fluid">
+
+  <h3>Introduction</h3>
+  <div class="well">
+    <p>Python has emerged as one of the most popular languages for geospatial analysis and scientific computing in general.
+        Part of its popularity stems from the fact that it is remarkably flexible, easy to read and easy to learn.  Plus, there are many
+        contributed modules for the Python language that can be used for data manipulation and numerical analysis.</p>
+
+    <p>I've been programming and scripting with Python for over ten years.  During that time, I've been amazed at Python's versatility.
+        Most recently, I've used Python in development of various geospatial projects.  These include:</p>
+    <ul>
+      <li>Writing custom tools and scripts for ArcGIS using the ArcPy module</li>
+      <li>Automation of open source geoprocessing, such as raster analysis with GRASS</li>
+      <li>Development of geospatial web applications and services using Django</li>
+    </ul>
+
+    <p>Below are some code snippets of Python I've written to handle various tasks.  Some of these examples can also be found in
+      my <a href="http://github.com/kb9zzw" title="Jon's GitHub Account">GitHub</a> account.</p>
+  </div>
+
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Django Model for Climate Impact Point Features</h3>
+      </div>
+      <div class="panel-body">
+        <pre><code class="language-python">
+from django.contrib.gis.db import models
+from django.contrib.gis import admin
+from django.conf.urls import patterns
+
+  IMPACT_TYPE_CHOICES = (
+    (0, 'Negative'),
+    (1, 'Positive'),
+  )
+
+  class Impact(models.Model):
+    '''Minnesota Climate Impacts'''
+    impact_type = models.IntegerField("Impact Type", choices=IMPACT_TYPE_CHOICES)
+    location_name = models.CharField("Location Name", max_length=50)
+    date = models.DateTimeField("Date", auto_now=True)
+    comment = models.TextField("Comment")
+    geom = models.PointField("Geometry", srid=4326)
+    objects = models.GeoManager()
+
+    def __unicode__(self):
+      '''Text representation of Impact'''
+      return '%s (%s,%s)' % (IMPACT_TYPE_CHOICES[self.impact_type][1], self.geom.y, self.geom.x)
+
+    class Meta:
+      db_table = 'impact'
+</code></pre>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">ArcPy Shapefile to KML Conversion</h3>
+      </div>
+      <div class="panel-body">
+        <pre><code class="language-python">
+#Name: shape2kml.py
+#Purpose: Converts a shapefile to kmz
+#Author: Jon Burroughs (jdburrou)
+#Date: 1/25/2012
+#Usage: shape2kml.py [shapefile] [workspace] [kmzFile] [scale]
+
+import arcpy, sys, os
+
+# Get shapefile from user and check that it is a shapefile (by name)
+shapefile = sys.argv[1]
+
+if not shapefile[-3:] == 'shp' :
+  raise ValueError('A shapefile is required')
+
+# Get workspace from user
+arcpy.env.workspace = sys.argv[2]
+
+# Get KMZ filename from user and check it
+kmzFile = sys.argv[3]
+
+if not kmzFile[-3:] == 'kmz' :
+  raise ValueError('A "kmz" or "kml" file is required.')
+
+# Get scale from user
+try :
+  scale = int(sys.argv[4])
+except ValueError :
+  raise ValueError('An integer scale value is required')
+
+# Allow overwrite of exisiting files
+arcpy.env.overwriteOutput = 1
+
+# Set output layer, based on shapefile name
+outLayer = shapefile[:-3] + "lyr"
+
+# Call tools
+try :
+  # Make feature layer from shapefile
+  arcpy.MakeFeatureLayer_management(inFeatures, outLayer)
+  # Convert layer to KMZ
+  arcpy.LayerToKML_conversion(outLayer, kmzFile, scale)
+except :
+  # Error occurred, punt
+  print arcpy.GetMessages()
+</code></pre>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+
+{% endblock "content" %}
+
+
+{% block "script" %}
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+{% endblock "script" %}

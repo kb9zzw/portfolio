@@ -1,0 +1,73 @@
+{% extends "index.html" %}
+
+{% load tags %}
+{% load static %}
+
+{% block "header" %}
+<header class="sb-page-header">
+  <div class="container-fluid">
+    <h1>Regional Snowfall Index</h1>
+    <p>Using GIS tools to analyze snowfall impacts.</p>
+  </div>
+</header>
+{% endblock "header" %}
+
+{% block "breadcrumb" %}
+<li class="{% active request "^/rsi/$" %}">Regional Snowfall Index</li>
+{% endblock "breadcrumb" %}
+
+{% block "content" %}
+<div class="container-fluid">
+  <h3>Introduction</h3>
+  <div class="well">
+    <p>Regional Snowfall Index (RSI) is a method developed by NOAA to quantify snow storms based on snowfall totals and impact
+      to populations.  It bears some resemblance to other storm indices, such as the Saffir-Simpson scale for hurricanes and the
+      Fujita scale for tornadoes.  But, since snowfall events tend to be region and regional populations vary in their
+      abilities to cope with snowfall, the index is calculated on a regional basis rather than a nation-wide basis.
+    </p>
+    <p>As part of my studies in the MGIST program, I developed two versions of the RSI tool.  The first one is developed
+      in Python for use within ArcGIS and is an adaption of the current RSI tool used operationally at NOAA.  The second
+      was developed in Python using GRASS as an experiment in data processing using open-source GIS tools.
+    </p>
+  </div>
+
+  <h3>Source Code on GitHub</h3>
+  <ul>
+    <li><a href="https://github.com/kb9zzw/rsi-toolbox" title="RSI Tool for ArcGIS">RSI Tool for ArcGIS</a></li>
+    <li><a href="https://github.com/kb9zzw/rsi-grass" title="RSI Plugin  for GRASS">RSI Plugin for GRASS</a></li>
+  </ul>
+
+  <h3>Video Overview</h3>
+
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">ArcGIS RSI Overview Video</h3>
+      </div>
+      <div class="panel-body embed-container">
+        <embed src="{% static "images/rsi_overview.swf" %}" />
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">ArcGIS RSI Tool Demonstration Video</h3>
+      </div>
+      <div class="panel-body embed-container">
+        <embed src="{% static "images/rsi_demo.swf" %}" />
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">RSI Tool for GRASS</h3>
+      </div>
+      <div class="panel-body embed-container">
+        <iframe src="//www.youtube.com/embed/aW5F4kI-5rw" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock "content" %}

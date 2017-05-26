@@ -1,0 +1,94 @@
+{% extends "index.html" %}
+
+{% load tags %}
+{% load static %}
+
+{% block "header" %}
+<header class="sb-page-header">
+  <div class="container-fluid">
+  <h1>GPS</h1>
+  <p>Collecting data from the field.</p>
+</header>
+{% endblock "header" %}
+
+{% block "breadcrumb" %}
+<li class="{% active request "^/gps/$" %}">GPS</li>
+{% endblock "breadcrumb" %}
+
+{% block "content" %}
+<div class="container-fluid">
+  <h3>Introduction</h3>
+  <div class="well">
+    <p>Collecting Global Positioning System (GPS) data has become remarkably easy and accessible during the past few years.
+    This is a great and increasingly affordable tool for collection geospatial data from the field.  While GPS receivers have
+    become ubiquitous in our consumer devices, such as smart phones, there are limitations with this hardware.</p>
+
+    <p>The example below shows points and tracks collected with a smartphone.  High accuracy is not possible with
+      this technology, but it is still possible to achieve a reasonable representation of location.</p>
+  </div>
+
+  <h3>GPS Tracks and Points</h3>
+  <p>This shows tracks and points collected from a smartphone in downtown Asheville, NC.  No corrections have been made
+    to the data.  Data have been exported to KML for display in Google Maps.</p>
+  <div id="map" style="height: 300px;"></div>
+
+  <h3>GPS Correction</h3>
+  <p>Some of the error associated with GPS data collection can be corrected with post processing.  One method is to apply
+    differential GPS correction using data from a high-accuracy base station.  Below shows GPS data collected on the
+    North Carolina State University campus before (blue) and after (red) differential GPS Correction from a nearby Raleigh CORS station.
+    Data was collected using a Trimble GPS.  Differential correction was performed using Trimble GPS Pathfinder.
+  </p>
+  <div id="cor_map" style="height: 300px;"></div>
+</div>
+{% endblock "content" %}
+
+{% block "script" %}
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6ltjs5JvHExng2fd5EthyqTxbvGGIf70">
+</script>
+
+<script type="text/javascript">
+function initialize() {
+  var mapOptions = {
+    center: { lat: 36.1028, lng: -80.2605 },
+    zoom: 16
+  };
+  var map = new google.maps.Map(document.getElementById('map'),
+    mapOptions);
+
+  var kml1 = new google.maps.KmlLayer({
+    url: 'https://googledrive.com/host/0BytX4fjKVz2sOVl3ZzFBVEQ3TzA/Export-130601-213746.kml'
+  });
+  kml1.setMap(map);
+
+  var kml2 = new google.maps.KmlLayer({
+    url: 'https://googledrive.com/host/0BytX4fjKVz2sOVl3ZzFBVEQ3TzA/Track-130601-203243.kml'
+  });
+  kml2.setMap(map);
+
+
+  var mapOptions2 = {
+    center: { lat: 35.7806, lng: -78.6389 },
+    mapTypeId: google.maps.MapTypeId.SATELLITE,
+    zoom: 12
+  };
+
+  var cor_map = new google.maps.Map(document.getElementById('cor_map'),
+    mapOptions2);
+
+  var kml3 = new google.maps.KmlLayer({
+    url: 'https://googledrive.com/host/0BytX4fjKVz2sOVl3ZzFBVEQ3TzA/raw.kmz'
+  });
+  kml3.setMap(cor_map);
+
+  var kml4 = new google.maps.KmlLayer({
+    url: 'https://googledrive.com/host/0BytX4fjKVz2sOVl3ZzFBVEQ3TzA/corrected.kmz'
+  });
+  kml4.setMap(cor_map);
+
+}
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+
+
+
+{% endblock "script" %}

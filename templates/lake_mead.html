@@ -1,0 +1,184 @@
+{% extends "index.html" %}
+
+{% load tags %}
+{% load static %}
+
+{% block "header" %}
+<header class="sb-page-header">
+  <div class="container-fluid">
+    <h1>Drought Monitoring</h1>
+    <p>Calculating the contraction of Lake Mead during 2013-2014</p>
+  </div>
+</header>
+{% endblock "header" %}
+
+{% block "breadcrumb" %}
+<li class="{% active request "^/lake_mead/$" %}">Drought Monitoring at Lake Mead</li>
+{% endblock "breadcrumb" %}
+
+{% block "content" %}
+<div class="container-fluid">
+  <h3>Introduction</h3>
+  <div class="well">
+    <img class="img-thumbnail" style="float: left; margin-right: 20px;" src="{% static "images/mead.jpg" %}" alt="Lake Mead" />
+    <p>Large portions of the western United States have been experiencing periods of persistent drought during the past decade.
+      Lower than normal precipitation has had wide-reaching impacts on water resources and agriculture.  This project
+      looked at drought impacts on Lake Mead from 2013 to 2014.  Drought conditions at Lake Mead have caused dramatic decrease in
+      water levels.  The decreasing water levels were especially noticeable in 2013-2014.<p>
+
+      <p>This study was a "before and after" comparison of Lake Mead lake levels from LandSat imagery of acquired from
+        March 24, 2013 and March 15, 2014.  Each image was analyzed using unsupervised classification to extract the
+        water features from the surrounding land features.  The surface area of the water features was calculated for each time period.
+        This showed a significant contraction of water area during the year.</p>
+  </div>
+
+  <div class="clearfix"></div>
+
+  <h3>Data</h3>
+  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Landsat (3/24/2013)</h3>
+      </div>
+      <div class="panel-body">
+        <img src="{% static "images/ls_mead1.png" %}" class="img-thumbnail"/>
+          <p>Imagery obtained from the start of the study period.</p>
+          <table class="table">
+            <tr>
+              <th>Source</th><td><a href="http://earthexplorer.usgs.gov/" title="USGS Earth Explorer">USGS Earth Explorer</a></td>
+            </tr>
+            <tr>
+              <th>Data Type</th><td>Raster</td>
+            </tr>
+              <th>Acquisition Date</th><td>3/24/2013</td>
+            </tr>
+            <tr>
+              <th>Entity ID</th><td>LC80390352013083LGN0</td>
+            <tr>
+              <th>Bands</th><td>11</td>
+            </tr>
+            <tr>
+              <th>Bit Depth</th><td>Unsigned 16-bit</td>
+            </tr>
+            <tr>
+              <th>Resolution</th><td>30m</td>
+            </tr>
+          </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Landsat (3/15/2014)</h3>
+      </div>
+      <div class="panel-body">
+        <img src="{% static "images/ls_mead2.png" %}" class="img-thumbnail"/>
+          <p>Imagery obtained from the end of the study period.</p>
+          <table class="table">
+            <tr>
+              <th>Source</th><td><a href="http://earthexplorer.usgs.gov/" title="USGS Earth Explorer">USGS Earth Explorer</a></td>
+            </tr>
+            <tr>
+              <th>Data Type</th><td>Raster</td>
+            </tr>
+              <th>Acquisition Date</th><td>3/15/2014</td>
+            </tr>
+            <tr>
+              <th>Entity ID</th><td>LC80390352014074LGN00</td>
+            <tr>
+              <th>Bands</th><td>11</td>
+            </tr>
+            <tr>
+              <th>Bit Depth</th><td>Unsigned 16-bit</td>
+            </tr>
+            <tr>
+              <th>Resolution</th><td>30m</td>
+            </tr>
+          </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="clearfix"></div>
+
+  <h3>Classification Process</h3>
+  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+    <div id="beforeafter1" class="twentytwenty-container">
+      <img alt="before" src="{% static "images/mead_raw.png" %}" style="width: 100%;"/>
+      <img alt="after" src="{% static "images/mead_class.png" %}" style="width: 100%;"/>
+    </div>
+  </div>
+  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+    <h4>Analysis performed using ERDAS Imagine 2013</h4>
+    <p>Lake Mead water feature extracted using:</p>
+    <ul>
+      <li>Unsupervised classification to distinguish water from land</li>
+      <li>Recoding, masking to identify and extract Lake Mead</li>
+      <li>Calculate surface area of water pixels identified as Lake Mead</li>
+    </ul>
+    <h4>Why unsupervised classification?</h4>
+    <p>Unsupervised image classification was performed due to simplicity of operation.  Also, this
+    method is effective when working with high-contrast features, such as water versus land in Band 4 (near infrared)</p>
+  </div>
+
+  <div class="clearfix"></div>
+
+  <h3>Results</h3>
+  <p>Analysis showed a decrease of lake surface area by almost 5% in one year of a decade's long drought. Images below show before (dark blue) and after (aqua) lake extent.
+  <div class="col-xs-12 col-sm-6 col-md-3 col-md-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Las Vegas Bay</h3>
+      </div>
+      <div class="panel-body">
+        <img src="{% static "images/mead_vegas_bay.png" %}" style="width: 100%;"/>
+        <p>The relatively shallow Las Vegas Bay showed significant contraction, including formation
+        of land bridges.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-12 col-sm-6 col-md-3 col-md-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Lake Mead Marina</h3>
+      </div>
+      <div class="panel-body">
+        <img src="{% static "images/mead_marina.png" %}" style="width: 100%;"/>
+        <p>Shore line near the Lake Mead marina contracted by up to 100m in some locations.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-12 col-sm-6 col-md-3 col-md-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Overton, Gulf "Islands"</h3>
+      </div>
+      <div class="panel-body">
+        <img src="{% static "images/mead_overton.png" %}" style="width: 100%;"/>
+        <p>What were previously islands are now connected to the mainland.  2014 drought
+        strenthened this land bridge.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-12 col-sm-6 col-md-3 col-md-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Pool Islands / Bonell Bay</h3>
+      </div>
+      <div class="panel-body">
+        <img src="{% static "images/mead_bonell.png" %}" style="width: 100%;"/>
+        <p>Shoreline contraction varies depending on shore steepness.</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock "content" %}
+
+{% block "script" %}
+<script>
+$(window).load(function() {
+  $('#beforeafter1').twentytwenty();
+});
+</script>
+{% endblock "script" %}

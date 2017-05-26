@@ -1,0 +1,220 @@
+{% extends "index.html" %}
+
+{% load tags %}
+{% load static %}
+
+{% block "style" %}
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+<style>
+  #map {
+    width: 100%;
+    height: 300px;
+    margin: 0;
+    padding: 0;
+  }
+
+  #popup {
+    text-align: center;
+    font-weight: bold;
+  }
+  #mn_climate {
+    width: 100%;
+    height: 400px;
+  }
+  }
+</style>
+{% endblock "style" %}
+
+{% block "header" %}
+<header class="sb-page-header">
+  <div class="container-fluid">
+  <h1>Open Source GIS</h1>
+</header>
+{% endblock "header" %}
+
+{% block "breadcrumb" %}
+<li class="{% active request "^/open_source/$" %}">Open Source GIS</li>
+{% endblock "breadcrumb" %}
+
+{% block "content" %}
+<div class="container-fluid">
+  <h3>Introduction</h3>
+  <div class="well">
+    <p>A wide variety of open source tools have emerged with GIS capabilities.  This ever-growing field covers
+    desktop applications, enterprise GIS infrastructure, web applications and more.  While commercial GIS tools
+    still have a large market share, it is increasingly possible to find open tools that will accomplish the job.
+    Benefits of open source GIS tools extend beyond cost.  Most GIS tools strive to adopt geospatial standards.  They
+    also allow tremendous flexibility to adapt the tools to meet particular needs.  This does come at some cost, though,
+    requiring deeper familiarity with the underlying technologies and occasionally sacrificing comprehensive functionality.
+    </p>
+    <p>During my studies at NCSU, I have been exposed to a number of open source GIS tools and frameworks.  Below are some
+      examples.</p>
+  </div>
+
+  <h3>GRASS</h3>
+  <p>Developed by the U.S. Army, GRASS has been under continuous development since the 1990's.  It has evolved to be powerful
+    geospatial processing application, specializing in raster data analysis.</p>
+  <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Viewshed Analysis</h3>
+      </div>
+      <div class="panel-body">
+        <img src="{% static "images/towerview_landuse.png" %}" style="width: 100%;" alt="Suitability Model"/>
+          <p>GRASS was used in this example to show land cover categories visible from a fixed-height tower in downtown Raleigh, NC.</p>
+          <p><a class="btn btn-default" href="{% static "images/towerview_landuse.png" %}" target="_blank" role="button">View Full Size &raquo;</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Flow Accumulation</h3>
+      </div>
+      <div class="panel-body">
+        <img src="{% static "images/flowacc_1m.png" %}" style="width: 100%;" alt="Suitability Model"/>
+          <p>GRASS is an effective tool for hydrologic analysis.  This example shows downslope flow accumulation derived
+          from 1m LIDAR data using the D-infinity flow algorithm.</p>
+          <p><a class="btn btn-default" href="{% static "images/flowacc_1m.png" %}" target="_blank" role="button">View Full Size &raquo;</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Least Cost Path</h3>
+      </div>
+      <div class="panel-body">
+        <img src="{% static "images/cost_path_major_roads.png" %}" style="width: 100%;" alt="Suitability Model"/>
+          <p>This image shows a cost surface analysis for major roads and serves as the basis for least cost path analysis. Shortest
+          distance to major roads is shown with warmer colors being further away from major roads.</p>
+          <p><a class="btn btn-default" href="{% static "images/cost_path_major_roads.png" %}" target="_blank" role="button">View Full Size &raquo;</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="clearfix"></div>
+
+  <h3>Leaflet</h3>
+  <p><a href="http://leafletjs.com/" target="_blank" title="LeafletJS">Leaflet</a> is a JavaScript map library for creating dynamic
+    web-based maps.  While it is a lightweight mapping library, it contains a wide range of functions covering most of the features
+    commonly used in development of map interfaces.</p>
+  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+    <div id="map"></div>
+  </div>
+  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+    <h4>Dynamic Maps</h4>
+    <p>Leaflet maps provide a rich and dynamic map interface.  This example shows some basic features of Leaflet, including
+      integration of OpenStreet Maps base layer and a custom marker with popup dialogue.</p>
+    <h4>Javascript Code</p>
+    <pre>var baseMap = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
+      maxZoom: 20
+    });
+
+    var map = L.map('map').setView([35.78167, -78.67635], 18).addLayer(baseMap);
+
+    L.marker([35.78167, -78.67635])
+      .addTo(map)
+      .bindPopup('Popup Content')
+      .openPopup();</pre>
+  </div>
+
+  <div class="clearfix"></div>
+
+  <h3>GeoDjango</h3>
+  <p><a href="https://www.djangoproject.com/" title="Django" target="_blank">Django</a> is a Python-based web framework designed for
+    rapid development of testable code.  GeoDjango is a built-in extension of Django that allows content types with geospatial geometries
+    to be modeled, queried and displayed.  This application middleware can provide the lightweight glue between geospatial backends, such as
+    PostGIS and web map interfaces, such as Leaflet.  Because it is written in Python, it can also integrate with the wide range
+    of scientific analysis and geospatial libraries available through the Python community.
+  <p>
+  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+    <iframe id="mn_climate" src="http://gis.fluxmess.com/"></iframe>
+  </div>
+  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+    <h4>Mobile-friendly Applications</h4>
+    <p>This application was developed to collect climate impacts along the north shore of Lake Superior.  It was implemented
+    using a PostGIS database, GeoDjango application layer and Leaflet interface.</p>
+    <h4>Representing Geometries in Python</p>
+    <pre>class Impact(models.Model):
+    '''Minnesota Climate Impacts'''
+    impact_type = models.IntegerField("Impact Type", choices=IMPACT_TYPE_CHOICES)
+    location_name = models.CharField("Location Name", max_length=50)
+    date = models.DateTimeField("Date", auto_now=True)
+    comment = models.TextField("Comment")
+    geom = models.PointField("Geometry", srid=4326)
+    objects = models.GeoManager()
+
+    def __unicode__(self):
+        '''Text representation of Impact'''
+        return '%s (%s,%s)' % (IMPACT_TYPE_CHOICES[self.impact_type][1], self.geom.y, self.geom.x)
+
+    class Meta:
+        db_table = 'impact'</pre>
+  </div>
+
+  <div class="clearfix"></div>
+
+  <h3>PostGIS</h3>
+  <p><a href="http://postgis.net/" target="_blank" title="PostGIS">PostGIS</a> brings open-source geospatial extensions to the PostgreSQL database.  Several commercial and open-source GIS frameworks
+  can utilize PostGIS as a foundational component to store spatial data and perform spatial queries.</p>
+  <div class="well">
+    <a href="{% static "images/mn_county.png" %}" title="View full size"><img class="img-thumbnail" src="{% static "images/mn_county_sm.png" %}" style="float: left; margin-right: 20px;"/></a>
+    <h4>Spatial SQL</h4>
+    <p>This example shows point-in-polygon summary for climate impacts in Minnesota counties.  The spatial analysis
+      is performed in PostgreSQL using a SQL view.  The SQL code defining this view is shown below.  It features a
+      PostGIS function that accumulates counts of points within a county polygon.  This allows for dynamic query of the number of impact points in each query.
+      The analysis is automatically updated as points are added to the database.<p>
+
+    <h4>SQL Code</h4>
+    <pre>CREATE VIEW county_count AS
+(SELECT
+county.gid,county.countyname,county.geom,
+  SUM(CASE WHEN ST_Contains(county.geom,impact.geom) THEN 1 ELSE 0 END) AS count
+FROM
+ county, impact
+GROUP BY
+county.gid
+);</pre>
+  </div>
+
+  <div class="clearfix"></div>
+
+  <h3>OpenGeo Suite</h3>
+  <p><a href="http://boundlessgeo.com/solutions/opengeo-suite/" target="_blank">OpenGeo Suite</a> is a collection of open-source
+    geospatial software bundled together to provide a complete platform for managing, analyzing and visualizing geospatial data.
+    Whilte the suite itself is a commercial (paid) product, tt contains several freely-available open-source components including
+    GeoServer, PostGIS, QGIS, OpenLayers and more.  This tool can provide a flexible environment
+    for building open-source GIS applications.</p>
+  <div class="well">
+    <a href="{% static "images/game_fish.png" %}" title="View full size"><img class="img-thumbnail" src="{% static "images/game_fish_sm.png" %}" style="float: left; margin-right: 20px;"/></a>
+    <h4>Styled Layer Descriptor</h4>
+    <p>This example shows game fish counts using GeoExplorer, one of the preview tools in GeoServer.  The point-based counts
+      are stored in PostGIS and styled using a <a href="http://www.opengeospatial.org/standards/sld" target="_blank" title="OGC Styled Layer Descriptor">Styled Layer Descriptor</a> XML file.  This
+      provides the color and size definitions for the layer, linked to the count attribute in the underlying database.<p>
+
+    <h4>SLD Code</h4>
+    <p>A code subset is displayed below.  Full SLD XML file can be downloaded <a href="{% static "sld_example.xml" %}" target="_blank" title="SLD file">here</a></p>
+    <img src="{% static "images/sld_example.png" %}" style="width: 300px;"/>
+  </div>
+
+</div>
+{% endblock "content" %}
+
+{% block "script" %}
+<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+<script type="text/javascript">
+var baseMap = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
+  maxZoom: 20
+});
+
+var map = L.map('map').setView([35.78167, -78.67635], 18).addLayer(baseMap);
+
+L.marker([35.78167, -78.67635])
+	.addTo(map)
+	.bindPopup('<div id="popup"><img src="{% static "images/cnr_logo_sm_000.jpg" %}" /><br />Jordan Hall<br />College of Natural Resources</div>')
+	.openPopup();
+</script>
+{% endblock "script" %}

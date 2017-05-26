@@ -1,0 +1,153 @@
+{% extends "index.html" %}
+
+{% load tags %}
+{% load static %}
+
+{% block "header" %}
+<header class="sb-page-header">
+  <div class="container-fluid">
+  <h1>ESRI ArcGIS</h1>
+</header>
+{% endblock "header" %}
+
+{% block "breadcrumb" %}
+<li class="{% active request "^/gps/$" %}">ESRI ArcGIS</li>
+{% endblock "breadcrumb" %}
+
+{% block "content" %}
+<div class="container-fluid">
+  <h3>Introduction</h3>
+  <div class="well">
+    <p>ESRI ArcGIS tools are used extensively throughout the <a href="#" title="NCSU MGIST">MGIST program at NCSU</a>.  Through the program, I
+    have developed broad expertise with this popular and common GIS suite.  Below are some examples of ArcGIS expertise that I've developed while
+    pursuing the MGIST program.</p>
+  </div>
+
+  <h3>Geoprocessing</h3>
+  <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Georeferencing AutoCAD</h3>
+      </div>
+      <div class="panel-body">
+        <img src="{% static "images/georeference_sm.jpg" %}" style="width: 100%;"/>
+          <p>This image shows NCSU campus master plan, symbolized, georeferenced and overlaid on an aerial photo.  Original data is in Autodesk CAD format.</p>
+          <p><a class="btn btn-default" href="{% static "images/georeference.jpg" %}" target="_blank" role="button">View Full Size &raquo;</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Geocoding</h3>
+      </div>
+      <div class="panel-body">
+        <img src="{% static "images/geocode_sm.jpg" %}" style="width: 100%;"/>
+          <p>Using the ArcGIS Geocoding tool, address data can be converted to points on the map.</p>
+          <p><a class="btn btn-default" href="{% static "images/geocode.jpg" %}" target="_blank" role="button">View Full Size &raquo;</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Raster &amp; Vector Data</h3>
+      </div>
+      <div class="panel-body">
+        <img src="{% static "images/vector_raster_sm.jpg" %}" style="width: 100%;"/>
+          <p>Roads are traditionally represented in vector format, but sometimes it is useful to convert vector data to raster
+          for certain geoprocessing operations, such as least cost path analysis.</p>
+          <p><a class="btn btn-default" href="{% static "images/vector_raster.jpg" %}" target="_blank" role="button">View Full Size &raquo;</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Fuzzy Selection</h3>
+      </div>
+      <div class="panel-body">
+        <img src="{% static "images/fuzzy_sm.jpg" %}" style="width: 100%;"/>
+          <p>This image shows areas suitable for bald eagle habitat determined by fuzzy logic.  Fuzzy membership in each selection criteria
+          are input into the Fuzzy Overlay tool in ArcGIS to produce this result.</p>
+          <p><a class="btn btn-default" href="{% static "images/fuzzy.jpg" %}" target="_blank" role="button">View Full Size &raquo;</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="clearfix visible-sm visible-md visible-lg"></div>
+
+  <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Cluster Analysis</h3>
+      </div>
+      <div class="panel-body">
+        <img src="{% static "images/cluster_sm.jpg" %}" style="width: 100%;"/>
+          <p>This example shows General-G cluster analysis of emergency calls indicating a high confidence of clustering at 200ft distance band.</p>
+          <p><a class="btn btn-default" href="{% static "images/cluster.jpg" %}" target="_blank" role="button">View Full Size &raquo;</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Custom Tools</h3>
+      </div>
+      <div class="panel-body">
+        <img src="{% static "images/tool_ui.png" %}" style="width: 100%;"/>
+          <p>This image shows custom toolbox user interface for the Regional Snowfall Index tool.</p>
+          <p><a class="btn btn-default" href="{% static "images/tool_ui.png" %}" target="_blank" role="button">View Full Size &raquo;</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="clearfix visible-sm"></div>
+
+  <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Network Analysis</h3>
+      </div>
+      <div class="panel-body">
+        <img src="{% static "images/route.png" %}" style="width: 100%;"/>
+          <p>This image shows using Network Analyst extensions in ArcGIS to determine the most efficient road route between four points.</p>
+          <p><a class="btn btn-default" href="{% static "images/route.png" %}" target="_blank" role="button">View Full Size &raquo;</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Spatial Analyisis</h3>
+      </div>
+      <div class="panel-body">
+        <img src="{% static "images/variance_sm.jpg" %}" style="width: 100%;"/>
+          <p>This image shows kriging variance of grey squirrel habitat using Spatial Analyst extensions in ArcGIS.</p>
+          <p><a class="btn btn-default" href="{% static "images/variance.jpg" %}" target="_blank" role="button">View Full Size &raquo;</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="clearfix visible-sm visible-md visible-lg"></div>
+
+  <h3>ESRI Training</h3>
+  <p>Below are certificates of completion for various ESRI training courses.</p>
+  <ul>
+    <li><a href="{% static "images/learning_arcgis_desktop.pdf" %}" title="Learning ArcGIS Desktop">Learning ArcGIS Desktop</a></li>
+    <li><a href="{% static "images/basics_of_raster_data.pdf" %}" title="Basics of Raster Data">Basics of Raster Data</a></li>
+    <li><a href="{% static "images/getting_started_with_the_geodatabase.pdf" %}" title="Getting Started with the Geodatabase">Getting Started with the Geodatabase</a></li>
+    <li><a href="{% static "images/getting_started_with_geodatabase_topology.pdf" %}" title="Getting Started with Geodatabase Topology">Getting Started with Geodatabase Topology</a></li>
+    <li><a href="{% static "images/working_with_geodatabase_domains_and_subtypes.pdf" %}" title="Working with Geodatabase Domains and Subtypes">Working with Geodatabase Domains and Subtypes</a></li>
+    <li><a href="{% static "images/turning_data_into_information.pdf" %}" title="Turning Data into Information">Turning Data into Information</a></li>
+    <li><a href="{% static "images/understanding_map_projections.pdf" %}" title="Understanding Map Projections and Coordinate Systems">Understanding Map Projections and Coordinate Systems</a></li>
+    <li><a href="{% static "images/using_raster_data_for_site_selection.pdf" %}" title="Using Raster Data for Site Selection">Using Raster Data for Site Selection</a></li>
+  </ul>
+
+</div>
+{% endblock "content" %}

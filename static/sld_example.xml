@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+	title: Game Fish Count Style Layer Descriptor 
+	author:  Jon Burroughs (jdburrou)
+	date:  10/28/2012
+-->
+<sld:StyledLayerDescriptor 
+  xmlns="http://www.opengis.net/sld" 
+  xmlns:sld="http://www.opengis.net/sld" 
+  xmlns:ogc="http://www.opengis.net/ogc" 
+  xmlns:gml="http://www.opengis.net/gml" 
+  version="1.0.0">
+	
+  <sld:NamedLayer>
+		<sld:Name>GameFishCount</sld:Name>
+		<sld:UserStyle>
+			<sld:Name>GameFishCount</sld:Name>
+			<sld:Title>Game Fish Count</sld:Title>
+			<sld:IsDefault>1</sld:IsDefault>
+			<sld:FeatureTypeStyle>
+				<sld:Name>GameFishCountStyles</sld:Name>
+				<sld:Title>GameFishCountStyles</sld:Title>
+		
+				<!-- First category, count < 2 -->
+				<sld:Rule>
+					<sld:Name>Category1</sld:Name>
+					<sld:Title>&lt; 2</sld:Title>
+					<ogc:Filter>
+						<ogc:PropertyIsLessThan>
+							<ogc:PropertyName>species_num</ogc:PropertyName>
+							<ogc:Literal>2</ogc:Literal>
+						</ogc:PropertyIsLessThan>
+					</ogc:Filter>
+		  
+					<!-- small green circle -->
+					<sld:PointSymbolizer>
+						<sld:Graphic>
+							<sld:Mark>
+								<sld:WellKnownName>circle</sld:WellKnownName>
+								<sld:Fill>
+									<sld:CssParameter name="fill">#0000CD</sld:CssParameter>
+								</sld:Fill>
+							</sld:Mark>
+							<sld:Size>
+								<ogc:Literal>10</ogc:Literal>
+							</sld:Size>
+						</sld:Graphic>
+					</sld:PointSymbolizer>
+		  
+					<!-- text label -->
+					<sld:TextSymbolizer>
+						<sld:Label>
+							<ogc:PropertyName>species_num</ogc:PropertyName>
+						</sld:Label>
+						<sld:Font>
+							<sld:CssParameter name="font-family">Arial</sld:CssParameter>
+							<sld:CssParameter name="font-size">16</sld:CssParameter>
+							<sld:CssParameter name="font-style">normal</sld:CssParameter>
+							<sld:CssParameter name="font-weight">bold</sld:CssParameter>
+						</sld:Font>
+						<sld:LabelPlacement>
+							<sld:PointPlacement>
+								<sld:AnchorPoint>
+									<sld:AnchorPointX>2</sld:AnchorPointX>
+									<sld:AnchorPointY>0.0</sld:AnchorPointY>
+								</sld:AnchorPoint>
+								<sld:Displacement>
+									<sld:DisplacementX>0</sld:DisplacementX>
+									<sld:DisplacementY>5</sld:DisplacementY>
+								</sld:Displacement>
+							</sld:PointPlacement>
+						</sld:LabelPlacement>
+						<sld:Fill>
+							<sld:CssParameter name="fill">#000000</sld:CssParameter>
+						</sld:Fill>
+					</sld:TextSymbolizer>
+				</sld:Rule>
+		
+				<!-- Second category.  count >= 2 and count < 6 -->
+				<sld:Rule>
+					<sld:Name>category2</sld:Name>
+					<sld:Title>&gt;= 2, &lt; 6</sld:Title>
+					<ogc:Filter>
+						<ogc:And>
+							<ogc:PropertyIsGreaterThanOrEqualTo>
+								<ogc:PropertyName>species_num</ogc:PropertyName>
+								<ogc:Literal>2</ogc:Literal>
+							</ogc:PropertyIsGreaterThanOrEqualTo>
+							<ogc:PropertyIsLessThan>
+								<ogc:PropertyName>species_num</ogc:PropertyName>
+								<ogc:Literal>6</ogc:Literal>
+							</ogc:PropertyIsLessThan>
+						</ogc:And>
+					</ogc:Filter>
+					
+					<!-- medium green circle -->
+					<sld:PointSymbolizer>
+						<sld:Graphic>
+							<sld:Mark>
+								<sld:WellKnownName>circle</sld:WellKnownName>
+								<sld:Fill>
+									<sld:CssParameter name="fill">#33B525</sld:CssParameter>
+								</sld:Fill>
+							</sld:Mark>
+							<sld:Size>
+								<ogc:Literal>14</ogc:Literal>
+							</sld:Size>
+						</sld:Graphic>
+					</sld:PointSymbolizer>
+					
+					<!-- text label -->
+					<sld:TextSymbolizer>
+						<sld:Label>
+							<ogc:PropertyName>species_num</ogc:PropertyName>
+						</sld:Label>
+						<sld:Font>
+							<sld:CssParameter name="font-family">Arial</sld:CssParameter>
+							<sld:CssParameter name="font-size">16</sld:CssParameter>
+							<sld:CssParameter name="font-style">normal</sld:CssParameter>
+							<sld:CssParameter name="font-weight">bold</sld:CssParameter>
+						</sld:Font>
+						<sld:LabelPlacement>
+							<sld:PointPlacement>
+								<sld:AnchorPoint>
+									<sld:AnchorPointX>2</sld:AnchorPointX>
+									<sld:AnchorPointY>0.0</sld:AnchorPointY>
+								</sld:AnchorPoint>
+								<sld:Displacement>
+									<sld:DisplacementX>0</sld:DisplacementX>
+									<sld:DisplacementY>5</sld:DisplacementY>
+								</sld:Displacement>
+							</sld:PointPlacement>
+						</sld:LabelPlacement>
+						<sld:Fill>
+							<sld:CssParameter name="fill">#000000</sld:CssParameter>
+						</sld:Fill>
+					</sld:TextSymbolizer>
+				</sld:Rule>
+		
+				<!-- Third category, count >= 6.  large red circle -->
+				<sld:Rule>
+					<sld:Name>category3</sld:Name>
+					<sld:Title>&gt;= 6</sld:Title>
+					<ogc:Filter>
+						<ogc:PropertyIsGreaterThanOrEqualTo>
+							<ogc:PropertyName>species_num</ogc:PropertyName>
+							<ogc:Literal>6</ogc:Literal>
+						</ogc:PropertyIsGreaterThanOrEqualTo>
+					</ogc:Filter>
+					<sld:PointSymbolizer>
+						<sld:Graphic>
+							<sld:Mark>
+								<sld:WellKnownName>circle</sld:WellKnownName>
+								<sld:Fill>
+									<sld:CssParameter name="fill">#FF0000</sld:CssParameter>
+								</sld:Fill>
+							</sld:Mark>
+							<sld:Size>
+								<ogc:Literal>18</ogc:Literal>
+							</sld:Size>
+						</sld:Graphic>
+					</sld:PointSymbolizer>
+					
+					<!-- text label -->
+					<sld:TextSymbolizer>
+						<sld:Label>
+							<ogc:PropertyName>species_num</ogc:PropertyName>
+						</sld:Label>
+						<sld:Font>
+							<sld:CssParameter name="font-family">Arial</sld:CssParameter>
+							<sld:CssParameter name="font-size">16</sld:CssParameter>
+							<sld:CssParameter name="font-style">normal</sld:CssParameter>
+							<sld:CssParameter name="font-weight">bold</sld:CssParameter>
+						</sld:Font>
+						<sld:LabelPlacement>
+							<sld:PointPlacement>
+								<sld:AnchorPoint>
+									<sld:AnchorPointX>2</sld:AnchorPointX>
+									<sld:AnchorPointY>0.0</sld:AnchorPointY>
+								</sld:AnchorPoint>
+								<sld:Displacement>
+									<sld:DisplacementX>0</sld:DisplacementX>
+									<sld:DisplacementY>5</sld:DisplacementY>
+								</sld:Displacement>
+							</sld:PointPlacement>
+						</sld:LabelPlacement>
+						<sld:Fill>
+							<sld:CssParameter name="fill">#000000</sld:CssParameter>
+						</sld:Fill>
+					</sld:TextSymbolizer>
+				</sld:Rule>
+			</sld:FeatureTypeStyle>
+	  
+		</sld:UserStyle>
+	</sld:NamedLayer>
+</sld:StyledLayerDescriptor>

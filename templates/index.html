@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+
+{% load tags %}
+{% load static %}
+{% load pipeline %}
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSS -->
+    {% stylesheet "libraries" %}
+
+    {% block "style" %}
+    <style>
+      #primary {
+        background-image: url('{% static "images/jb.jpg" %}');
+        background-repeat: no-repeat;
+        background-position: center;  /* Internet Explorer 7/8 */
+        height: 1040px;
+        margin: 0;
+        padding: 0;
+      }
+
+      .footer {
+        margin-top: 0px;
+      }
+    </style>
+    {% endblock "style" %}
+
+    <!-- JS -->
+    {% javascript "libraries" %}
+
+  </head>
+  <body>
+    {% block "nav" %}
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+
+        <div class="navbar-header">
+          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="../" class="navbar-brand">Jon's Portfolio</a>
+        </div>
+
+        <div class="navbar-collapse collapse" id="navbar-main">
+          <ul class="nav navbar-nav">
+
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="examples">Examples<span class="caret"></span></a>
+              <ul class="dropdown-menu" aria-labelledby="themes">
+                <li><span class="label label-default">Geospatial Projects</span></li>
+                <li><a href="/mn_climate/">Minnesota Climate Impacts</a></li>
+                <li><a href="/svr_wx/">2011 Severe Weather</a></li>
+                <li><a href="/rsi/">Regional Snowfall Index</a></li>
+                <li><a href="/lake_mead/">Drought Monitoring at Lake Mead</a></li>
+
+                <li><span class="label label-default">Geospatial Information Science</span></li>
+                <li><a href="/mapping/">Mapping &amp; Cartography</a></li>
+                <li><a href="/interpolation/">Spatial Interpolation</a></li>
+                <li><a href="/suitability/">Suitability Analysis</a></li>
+                <li><a href="/gps/">GPS</a></li>
+                <li><a href="/image_classification/">Image Classification</a></li>
+                <li><a href="/remote_sensing">Remote Sensing</a></li>
+                <li><span class="label label-default">Geospatial Technologies</span></li>
+                <li><a href="/esri/">ESRI ArcGIS</a></li>
+                <li><a href="/open_source/">Open Source GIS</a></li>
+                <li><a href="/python/">Python</a></li>
+                <li><a href="/web_services/">Web Services</a></li>
+              </ul>
+            </li> <!-- end drop down -->
+
+            <li><a href="/about">About MGIST</a></li>
+
+            <li><a href="/contact">Contact Me</a></li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="http://www.linkedin.com/in/jonburroughs" alt="LinkedIn Profile" />LinkedIn Profile<img style="margin-left: 5px; height: 22px; width: 22px;" src="{% static "images/linkedin_32.png" %}" /></a></li>
+          </ul>
+
+        </div>
+      </div>
+    </nav>
+    {% endblock "nav" %}
+
+    {% block "header" %}
+    <header class="sb-page-header">
+      <div class="container-fluid">
+      <h1>Welcome</h1>
+      <p>The official GIS portfolio of Jon Burroughs!</p>
+    </header>
+    {% endblock "header" %}
+
+    <ol class="breadcrumb" style="margin: 0;">
+      <li class="{% active request "^/$" %}"><a href="/">Home</a></li>
+      {% block "breadcrumb" %}
+
+      {% endblock "breadcrumb" %}
+    </ol>
+
+    {% block "content" %}
+    <div class="container-fluid" id="primary">
+      <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+        <h3>Hello and welcome to my GIS portfolio!</h3>
+        <p>On this site, you will find a demonstration of my GIS capabilities as well as a showcase of some of my projects
+          accumulated while pursuing a Master's degree in Geospatial Information Science and Technology at North
+          Carolina State University.  The goal of this site is to show a well-rounded sampling of my understanding of
+          geospatial technologies and their application to environmental issues.</p>
+
+        <h3>About Jon</h3>
+        <p>My expertise extends beyond GIS and includes a strongly technical background in web development, systems engineering and
+          scientific programming.  I am attracted to projects that allow me to mix my interest in environmental science, specifically
+          meteorology and climatology, with my skills in software development and systems engineering.  I will be graduating in December, 2014.  Afterwards,
+            I'll be looking for ways to apply my technical and geospatial skills in new and interesting ways.  If you'd like to suggest a GIS
+            project or would just like to contact me, feel free to <a href="/contact" alt="contact Jon">drop me a note</a>.</p>
+
+        <h4>You can also find me on <a href="http://www.linkedin.com/in/jonburroughs" alt="LinkedIn Profile">LinkedIn</a>.</h4>
+      </div>
+    </div>
+    {% endblock "content" %}
+
+    {% block "footer" %}
+    <footer class="footer">
+      <div class="container-fluid">
+        <p>This site was put together by <a href="/contact" alt="Contact Jon Burroughs">Jon Burroughs</a>.</p>
+      </div>
+    </footer>
+    {% endblock "footer" %}
+
+    {% block "script" %}
+    {% endblock "script" %}
+  </body>
+</html>

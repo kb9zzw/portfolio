@@ -1,0 +1,213 @@
+{% extends "index.html" %}
+
+{% load tags %}
+{% load static %}
+
+{% block "header" %}
+<header class="sb-page-header">
+  <div class="container-fluid">
+    <h1>Spatial Interpolation</h1>
+    <p>Inferring the unknown from the known.</p>
+  </div>
+</header>
+{% endblock "header" %}
+
+{% block "breadcrumb" %}
+<li class="{% active request "^/interpolation/$" %}">Spatial Interpolation</li>
+{% endblock "breadcrumb" %}
+
+{% block "content" %}
+<div class="container-fluid">
+
+  <h3>Introduction</h3>
+  <div class="well">
+    <p>There are situations where it is necessary to estimate data in places where direct measurement cannot or was not taken.  Furthermore,
+      there are many ways that this inference can be performed.  No interpolation method is perfect. Below are some examples of different interpolation methods along with some
+      comments on their advantages and disadvantages.</p>
+  </div>
+
+  <h3>Spline Interpolation</h3>
+  <p>Splining involves mathematically finding "best fit" polynomial equation that passes through or near the known data points.
+      Here are some examples of bivariate and multivariate spline interpolations.</p>
+
+  <div class="col-sm-6 col-md-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Hillshade Spline with High Tension</h3>
+      </div>
+      <div class="panel-body">
+        <img src="{% static "images/spline_tension_high.png" %}" style="width: 100%;"/>
+          <p>The dimpled effect of the hillshade in this image is the result of using a high tension coefficient.  In this example, there
+            are many local minima and maxima present, some of which are probably artificial.  This can be thought of as a
+              thinner rubber sheet, stretched by the data.  This image was produced from elevation data in GRASS.</p>
+          <p><a class="btn btn-default" href="{% static "images/spline_tension_high.png" %}" target="_blank" role="button">View Full Size &raquo;</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6 col-md-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Hillshade Spline with Low Tension</h3>
+      </div>
+      <div class="panel-body">
+        <img src="{% static "images/spline_tension_low.png" %}" style="width: 100%;"/>
+          <p>The smoother effect of the hillshade in this image is the result of using a low tension coefficient.  This can be thought of as a
+              thicker rubber sheet, stretched by the data.  The image is smoother, but local minima and maxima may be masked due to the lower tension.
+              This image was produced from elevation data in GRASS.</p>
+          <p><a class="btn btn-default" href="{% static "images/spline_tension_low.png" %}" target="_blank" role="button">View Full Size &raquo;</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="visible-sm-block clearfix"></div>
+
+  <div class="col-sm-6 col-md-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Bivariate Spline Precipitation Normals</h3>
+      </div>
+      <div class="panel-body">
+        <img src="{% static "images/precipitation_interp.png" %}" style="width: 100%;"/>
+        <p>This interpolation of precipitation normals was performed in GRASS using bivariate spline technique.  This
+            produces a uniformly smooth interpolation. Notice the maxima and minima around the mountains of Asheville, NC.</p>
+        <p><a class="btn btn-default" href="{% static "images/precipitation_interp.png" %}" target="_blank" role="button">View Full Size &raquo;</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6 col-md-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Trivariate Spline Precipitation Normals</h3>
+      </div>
+      <div class="panel-body">
+        <img src="{% static "images/precipitation_interp_topo_3D.png" %}" style="width: 100%;"/>
+        <p>By adding a third variable, in this case elevation, it is possible to perform a trivariate
+            interpolation of precipitation.  In this case, the terrain features enhance visualization of maxima and minima
+            precipitation areas around Asheville, NC.</p>
+        <p><a class="btn btn-default" href="{% static "images/precipitation_interp_topo_3D.png" %}" target="_blank" role="button">View Full Size &raquo;</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="clearfix"></div>
+
+  <h3>Inverse Distance Weighting</h3>
+
+  <p>Inverse distance weighting is another interpolation method that is populuar because it is relatively easy to calculate
+      and often produces acceptable results.  Because it is mathematically simpler, it is often used when there are large
+      numbers of data points to be interpolated.  However, inverse distance weighting is susceptible to local influences.  This
+      can produce a bullseye effect in the output.  Local influence can be adjusted by varying the power of the weighting.</p>
+
+  <p>Below are a few examples of inverse distance weighting interpolation.</p>
+
+  <div class="col-sm-6 col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Hillshade with Inverse Distance Weighting</h3>
+      </div>
+      <div class="panel-body">
+        <img src="{% static "images/idw_aspect.png" %}" style="width: 100%;"/>
+          <p>Local pits or bullseyes can be seen with in this hillshade interpolation using inverse distance weighting.</p>
+          <p><a class="btn btn-default" href="{% static "images/idw_aspect.png" %}" target="_blank" role="button">View Full Size &raquo;</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6 col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">3D Inverse Distance Weighting</h3>
+      </div>
+      <div class="panel-body">
+        <img src="{% static "images/idw_3d.png" %}" style="width: 100%;"/>
+        <p>Pits and bullseyes are more pronounced with this 3D view of elevation modeling using inverse distance weighting.</p>
+        <p><a class="btn btn-default" href="{% static "images/idw_3d.png" %}" target="_blank" role="button">View Full Size &raquo;</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="visible-sm-block clearfix"></div>
+
+  <div class="col-sm-6 col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">IDW of Grey Squirrel Habitat Suitability Index</h3>
+      </div>
+      <div class="panel-body">
+        <img src="{% static "images/squirrel_idw.jpg" %}" style="width: 100%;"/>
+        <p>Local &quot;hot spots&quot; can be readily seen in this interpolation of grey squirrel habitat suitability index.</p>
+        <p><a class="btn btn-default" href="{% static "images/squirrel_idw.jpg" %}" target="_blank" role="button">View Full Size &raquo;</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="clearfix"></div>
+
+  <h3>Other Interpolation Methods</h3>
+
+  <div class="col-sm-6 col-md-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Voronoi Polygons</h3>
+      </div>
+      <div class="panel-body">
+        <img src="{% static "images/voronoi3.png" %}" style="width: 100%;"/>
+          <p>This elevation raster is produced by creating voronoi polygons from random elevation sampling.  This quick interpolation method
+          will often result in a stair-step effect due to the consituent polygons having a constant elevation value.</p>
+          <p><a class="btn btn-default" href="{% static "images/voronoi3.png" %}" target="_blank" role="button">View Full Size &raquo;</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6 col-md-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Triangular Irregular Network</h3>
+      </div>
+      <div class="panel-body">
+        <img src="{% static "images/tin.png" %}" style="width: 100%;"/>
+          <p>Triangular Irregular Network (TIN) is another way to model elevation.  TINs are advantageous because of their efficiency in calculation and storage.
+          This TIN was generated in GRASS using Delaunay Triangulation, which ensures that a circle drawn through the nodes of
+          a triangle will contain no other nodes.</p>
+          <p><a class="btn btn-default" href="{% static "images/tin.png" %}" target="_blank" role="button">View Full Size &raquo;</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="visible-sm-block clearfix"></div>
+
+  <div class="col-sm-6 col-md-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Linear Interpolation</h3>
+      </div>
+      <div class="panel-body">
+        <img src="{% static "images/3d-linear-interp.png" %}" style="width: 100%;"/>
+          <p>This 3D elevation raster was produced via linear interpolation from 2D contour data.  This can be a useful method if
+            working with vector contour lines.  However, discontinuities can be seen where the original contour lines were.
+          <p><a class="btn btn-default" href="{% static "images/3d-linear-interp.png" %}" target="_blank" role="button">View Full Size &raquo;</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6 col-md-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Kriging</h3>
+      </div>
+      <div class="panel-body">
+        <img src="{% static "images/krg.jpg" %}" style="width: 100%;"/>
+          <p>Kriging is different from other deterministic interpolation techniques.  This technique uses semivariogram model of the
+            entire data set to predict values.  Kriging has the advantage of also producing an error or confidence value for the interpolation.
+            This image uses Kriging to analyze grey squirrel habitat suitability.
+          <p><a class="btn btn-default" href="{% static "images/krg.jpg" %}" target="_blank" role="button">View Full Size &raquo;</a></p>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>
+{% endblock "content" %}
